@@ -6,5 +6,42 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #121212;
-  color: #fafafa;
+  color: #e5e7eb;
 }
+
+
+
+
+
+/* 
+Fundo principal:
+
+#121212 → bem escuro (background geral)
+
+Fundo secundário (cartões/inputs):
+
+#1E1E1E → cinza escuro
+
+Texto principal:
+
+#E5E7EB (cinza claro, quase branco)
+
+Texto secundário:
+
+#9CA3AF (cinza médio para descrições/legendas)
+
+Bordas/linhas:
+#374151 (cinza mais forte, discreto)
+
+Cor de destaque primária (botões, foco):
+
+#833AB4 (roxo principal)
+
+Cor de destaque secundária:
+
+#FD1D1D (vermelho para alertas ou curtidas)
+
+Apoio (links ou ícones):
+
+#3897F0 (azul suave)
+*/

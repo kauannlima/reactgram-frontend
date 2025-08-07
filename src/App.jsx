@@ -17,7 +17,7 @@ function App() {
     <>
       <BrowserRouter>
         <NavBar />
-        <div className="min-h-[70vh]">
+        <div className="min-h-screen">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

@@ -4,9 +4,11 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      class="bg-[#121212] h-[200px] flex justify-center items-center border-t border-[#363636]"
+      className=" bg-[#000] h-[50px] flex justify-center items-center 
+                 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-t 
+                 dark:border-white/10 shadow-lg"
     >
-      <p>ReactGram &copy; 2025 — Desenvolvido por Kauan L.</p>
+      <p className="text-[#9CA3AF] text-sm">ReactGram &copy; 2025 — Desenvolvido por Kauan L.</p>
     </footer>
   );
 };
