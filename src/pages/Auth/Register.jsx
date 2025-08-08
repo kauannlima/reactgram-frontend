@@ -1,5 +1,7 @@
 // Components
 import { Link } from "react-router-dom";
+import Message from "../../components/Message";
+import { OrbitProgress } from "react-loading-indicators";
 
 // Hooks
 import { useState, useEffect } from "react";
@@ -84,12 +86,19 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword || ""}
           />
-          <input
-            type="submit"
-            value="Cadastrar"
-            className="w-full cursor-pointer bg-[#833AB4] text-white font-bold py-3 rounded hover:bg-[#6c2d95] transition"
-          />
+     <div className="h-[48px] flex justify-center items-center">
+          {!loading ? (
+            <input
+              type="submit"
+              value="Cadastrar"
+              className="w-full cursor-pointer bg-[#833AB4] text-white font-bold py-3 rounded hover:bg-[#6c2d95] transition"
+            />
+          ) : (
+            <OrbitProgress color="#833AB4" size="small" text="" textColor="" />
+          )}</div>
+          <Message msg={error} type="error" />
         </form>
+
         <p className="mt-4 text-center">
           Já tem conta?{" "}
           <Link to="/login" className="text-[#3897F0] hover:underline">
