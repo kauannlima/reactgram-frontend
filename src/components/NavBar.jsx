@@ -1,9 +1,38 @@
 import React from "react";
+
+// Components
 import { NavLink, Link } from "react-router-dom";
-import { BsSearch, BsHouseDoorFill, BsFillPersonFill,
-  BsFillCameraFill } from "react-icons/bs";
+import {
+  BsSearch,
+  BsHouseDoorFill,
+  BsFillPersonFill,
+  BsFillCameraFill,
+} from "react-icons/bs";
+
+// Hooks
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+// Redux
+import { logout, reset } from "../slices/authSlice";
 
 const NavBar = () => {
+  const { auth } = useAuth();
+  const { user } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+
+    navigate("/login");
+  };
+
   return (
     <nav
       id="nav"
@@ -13,7 +42,6 @@ const NavBar = () => {
                  border-b border-gray-200 dark:border-white/10 shadow-lg
                  text-gray-800 dark:text-gray-200 font-medium"
     >
-  
       <Link to="/" className="text-xl font-bold">
         ReactGram
       </Link>
@@ -31,23 +59,59 @@ const NavBar = () => {
         />
       </form>
 
-  
       <ul id="nav-links" className="flex items-center gap-6">
-        <li>
-          <NavLink to="/" className="hover:text-[#833AB4] transition">
-            <BsHouseDoorFill className="text-xl" />
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/login" className="hover:text-[#833AB4] transition">
-            Entrar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/register" className="hover:text-[#833AB4] transition">
-            Cadastrar
-          </NavLink>
-        </li>
+        {auth ? (
+          <>
+            <li>
+              <NavLink to="/" className="hover:text-[#833AB4] transition">
+                <BsHouseDoorFill className="text-xl" />
+              </NavLink>
+            </li>
+            {user && (
+              <li>
+                <NavLink
+                  to={`/users/${user._id}`}
+                  className="hover:text-[#833AB4] transition"
+                >
+                  <BsFillCameraFill className="text-xl" />
+                </NavLink>
+              </li>
+            )}
+            <li>
+              <NavLink
+                to="/profile"
+                className="hover:text-[#833AB4] transition"
+              >
+                <BsFillPersonFill className="text-xl" />
+              </NavLink>
+            </li>
+            <li>
+              <span
+                onClick={handleLogout}
+                className="hover:text-[#833AB4] transition text-xl cursor-pointer
+"
+              >
+                Sair
+              </span>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <NavLink to="/login" className="hover:text-[#833AB4] transition">
+                Entrar
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/register"
+                className="hover:text-[#833AB4] transition"
+              >
+                Cadastrar
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
