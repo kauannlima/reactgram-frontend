@@ -31,8 +31,6 @@ const Register = () => {
       confirmPassword,
     };
 
-    console.log(user);
-
     dispatch(register(user));
   };
 
@@ -86,16 +84,22 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword || ""}
           />
-     <div className="h-[48px] flex justify-center items-center">
-          {!loading ? (
-            <input
-              type="submit"
-              value="Cadastrar"
-              className="w-full cursor-pointer bg-[#833AB4] text-white font-bold py-3 rounded hover:bg-[#6c2d95] transition"
-            />
-          ) : (
-            <OrbitProgress color="#833AB4" size="small" text="" textColor="" />
-          )}</div>
+          <div className="h-[48px] flex justify-center items-center">
+            {!loading ? (
+              <input
+                type="submit"
+                value="Cadastrar"
+                className="w-full cursor-pointer bg-[#833AB4] text-white font-bold py-3 rounded hover:bg-[#6c2d95] transition"
+              />
+            ) : (
+              <OrbitProgress
+                color="#833AB4"
+                size="small"
+                text=""
+                textColor=""
+              />
+            )}
+          </div>
           <Message msg={error} type="error" />
         </form>
 
