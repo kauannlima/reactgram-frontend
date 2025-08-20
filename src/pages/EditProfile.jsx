@@ -1,15 +1,15 @@
-import { uploads } from "../../utils/config";
+import { uploads } from "../utils/config";
 
 // Hooks
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Redux
-import { profile, resetMessage, updateProfile } from "../../slices/userSlice";
+import { profile, resetMessage, updateProfile } from "../slices/userSlice";
 
 //Components
 import { OrbitProgress } from "react-loading-indicators";
-import Message from "../../components/Message";
+import Message from "../components/Message";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -103,6 +103,14 @@ const EditProfile = () => {
     cursor-pointer
   `;
 
+    if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <OrbitProgress color="#833AB4" size="large" text="" textColor="" />
+      </div>
+    );
+  }
+  
   return (
     <section className="min-h-screen flex items-center justify-center py-20">
       <div className="w-[320px] sm:w-[400px] md:w-[500px] px-4 ">
