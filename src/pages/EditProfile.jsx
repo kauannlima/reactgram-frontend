@@ -83,25 +83,27 @@ const EditProfile = () => {
     setProfileImage(image);
   };
 
-  const inputClasses = `
-    w-full
-    rounded
-    px-4 py-3
-    bg-[#121212] text-gray-200
-    border border-[#374151]
-    focus:outline-none focus:ring-2 focus:ring-[#833AB4]
-    transition
-  `;
+const inputClasses = `
+  w-full
+  rounded
+  px-4 py-3
+  bg-[#121212] text-gray-200
+  border border-[#374151]
+  focus:outline-none focus:ring-2 focus:ring-[#833AB4]
+  transition
+  mb-5
+`;
 
-  const fileInputClasses = `
-    block w-full text-sm text-gray-200
-    file:mr-4 file:py-2 file:px-4
-    file:rounded file:border-0
-    file:text-sm file:font-semibold
-    file:bg-[#833AB4] file:text-white
-    hover:file:bg-[#6c2d95]
-    cursor-pointer
-  `;
+const fileInputClasses = `
+  block w-full text-sm text-gray-200
+  file:mr-4 file:py-2 file:px-4
+  file:rounded file:border
+  file:text-sm file:font-semibold
+  file:border-[#833AB4] file:text-[#833AB4]
+  hover:file:bg-[#1E1E1E]
+  file:cursor-pointer cursor-pointer
+  mb-5
+`;
 
     if (loading) {
     return (
