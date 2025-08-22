@@ -137,7 +137,7 @@ const Profile = () => {
     );
   }
 
- const inputClasses = `
+  const inputClasses = `
   w-full
   rounded
   px-4 py-3
@@ -148,7 +148,7 @@ const Profile = () => {
   mb-5
 `;
 
-const fileInputClasses = `
+  const fileInputClasses = `
   block w-full text-sm text-gray-200
   file:mr-4 file:py-2 file:px-4
   file:rounded file:border

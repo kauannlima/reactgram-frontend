@@ -23,3 +23,5 @@ const Home = () => {
 };
 
 export default Home;
+
+//.photo-item h2{margin-bottom: .2em}
