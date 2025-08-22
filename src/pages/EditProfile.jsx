@@ -122,8 +122,7 @@ const EditProfile = () => {
         </p>
         {(user.profileImage || previewImage) && (
           <div className="flex items-center justify-center">
-            {" "}
-            <img
+         <img
               className="w-[150px] h-[150px] rounded-full mb-4 justify-center"
               src={
                 previewImage
