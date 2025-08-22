@@ -17,6 +17,7 @@ import {
   publishPhoto,
   resetMessage,
   getUserPhotos,
+  deletePhoto,
 } from "../slices/photoSlice";
 
 const Profile = () => {
@@ -51,6 +52,12 @@ const Profile = () => {
     setImage(image);
   };
 
+  const resetComponentMessage = () => {
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
+  };
+
   const submitHandle = (e) => {
     e.preventDefault();
 
@@ -72,9 +79,14 @@ const Profile = () => {
 
     setTitle("");
 
-    setTimeout(() => {
-      dispatch(resetMessage());
-    }, 2000);
+    resetComponentMessage();
+  };
+
+  //Delete a photo
+  const handleDelete = (id) => {
+    dispatch(deletePhoto(id));
+
+    resetComponentMessage();
   };
 
   if (loading) {
@@ -187,15 +199,15 @@ const Profile = () => {
                 {id === userAuth._id ? (
                   <div className="flex justify-around p-[10px]">
                     <Link to={`/photos/${photo._id}`}>
-                      <BsFillEyeFill className="pointer" />
+                      <BsFillEyeFill className="cursor-pointer" />
                     </Link>
                     <BsPencilFill
                       onClick={() => handleEdit(photo)}
-                      className="pointer"
+                      className="cursor-pointer"
                     />
                     <BsXLg
                       onClick={() => handleDelete(photo._id)}
-                      className="pointer"
+                      className="cursor-pointer"
                     />
                   </div>
                 ) : (
