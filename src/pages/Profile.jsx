@@ -160,29 +160,35 @@ const Profile = () => {
 `;
 
   return (
-    <div className="py-20 w-[50%] mx-auto">
-      <div className="flex items-center flex-wrap p-4 border-b border-[#363636]">
+    <div className="py-20 w-full max-w-4xl mx-auto">
+      {/* Header */}
+      <div className="flex flex-wrap items-center p-4 border-b border-[#363636]">
         {user.profileImage && (
           <img
             src={`${uploads}/users/${user.profileImage}`}
             alt={user.name}
-            className="w-[100px] h-[100px] rounded-full mr-[2em]"
+            className="w-24 h-24 rounded-full mr-6 object-cover"
           />
         )}
         <div>
-          <h1 className="text-2xl font-bold mb-3">{user.name}</h1>
-          <p className="text-base">{user.bio}</p>
+          <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
+          <p className="text-gray-300 text-base">{user.bio}</p>
         </div>
       </div>
+
+      {/* New Photo Form */}
       {id === userAuth._id && (
         <>
-          <div ref={newPhotoForm} className="p-[1em] border-b border-[#363636]">
-            <h3 className="text-xl font-bold my-5 text-left">
+          <div
+            ref={newPhotoForm}
+            className="p-6 border-b border-[#363636] rounded-md bg-[#1a1a1a] mb-6"
+          >
+            <h3 className="text-2xl font-bold mb-4">
               Compartilhe algum momento seu:
             </h3>
-            <form onSubmit={submitHandle}>
-              <label className="flex flex-col space-y-1">
-                <span className="block mb-1 text-sm font-medium text-gray-300">
+            <form onSubmit={submitHandle} className="space-y-4">
+              <label className="flex flex-col">
+                <span className="mb-1 text-sm font-medium text-gray-300">
                   Título para a foto:
                 </span>
                 <input
@@ -190,19 +196,21 @@ const Profile = () => {
                   placeholder="Insira um título"
                   onChange={(e) => setTitle(e.target.value)}
                   value={title || ""}
-                  className={inputClasses}
+                  className="w-full rounded px-4 py-3 bg-[#121212] text-gray-200 border border-[#374151] focus:outline-none focus:ring-2 focus:ring-[#833AB4] transition"
                 />
               </label>
-              <label className="flex flex-col space-y-1">
-                <span className="block mb-1 text-sm font-medium text-gray-300">
+
+              <label className="flex flex-col">
+                <span className="mb-1 text-sm font-medium text-gray-300">
                   Imagem:
                 </span>
                 <input
                   type="file"
                   onChange={handleFile}
-                  className={fileInputClasses}
+                  className="block w-full text-sm text-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:text-sm file:font-semibold file:border-[#833AB4] file:text-[#833AB4] hover:file:bg-[#1E1E1E] file:cursor-pointer cursor-pointer"
                 />
               </label>
+
               {!loading ? (
                 <input
                   type="submit"
@@ -219,27 +227,28 @@ const Profile = () => {
               )}
             </form>
           </div>
+
+          {/* Edit Photo Form */}
           <div
-            className="hide mb-[1em] p-[1em] border-b border-[#363636]"
             ref={editPhotoForm}
+            className="hide p-6 border-b border-[#363636] rounded-md bg-[#1a1a1a] mb-6"
           >
-            <h3 className="text-xl font-bold my-5 text-left">Editando: </h3>
+            <h3 className="text-2xl font-bold mb-4">Editando:</h3>
             {editImage && (
               <img
                 src={`${uploads}/photos/${editImage}`}
                 alt={editTitle}
-                className="mb-[1em] w-full"
+                className="mb-4 w-full max-h-104 object-cover rounded-md"
               />
             )}
-            <form onSubmit={handleUpdate}>
-              <label className="flex flex-col space-y-1">
-                <input
-                  type="text"
-                  onChange={(e) => setEditTitle(e.target.value)}
-                  value={editTitle || ""}
-                  className={inputClasses}
-                />
-              </label>
+
+            <form onSubmit={handleUpdate} className="space-y-4">
+              <input
+                type="text"
+                onChange={(e) => setEditTitle(e.target.value)}
+                value={editTitle || ""}
+                className="w-full rounded px-4 py-3 bg-[#121212] text-gray-200 border border-[#374151] focus:outline-none focus:ring-2 focus:ring-[#833AB4] transition"
+              />
               {!loading ? (
                 <input
                   type="submit"
@@ -255,50 +264,56 @@ const Profile = () => {
                 />
               )}
               <button
-                className="w-full cursor-pointer border  font-bold py-3 rounded hover:bg-[#1E1E1E] text-[#833AB4] border-[#833AB4] transition mt-3"
+                className="w-full border border-[#833AB4] text-[#833AB4] font-bold py-3 rounded hover:bg-[#1E1E1E] transition"
                 onClick={handleCancelEdit}
               >
                 Cancelar edição
               </button>
             </form>
           </div>
+
           {errorPhoto && <Message msg={errorPhoto} type="error" />}
           {messagePhoto && <Message msg={messagePhoto} type="success" />}
         </>
       )}
+
+      {/* User Photos */}
       <div className="user-photos">
-        <h3 className="text-xl font-bold my-5 text-left">Fotos publicadas:</h3>
-        <div className="flex flex-wrap ">
-          {photos &&
+        <h3 className="text-2xl font-bold mb-4">Fotos publicadas:</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {photos && photos.length > 0 ? (
             photos.map((photo) => (
-              <div className="w-[32%] m-[0.3%]" key={photo._id}>
+              <div
+                key={photo._id}
+                className="rounded-md overflow-hidden bg-[#1a1a1a]"
+              >
                 {photo.image && (
                   <img
-                    className="w-full"
+                    className="w-full h-64 object-cover"
                     src={`${uploads}/photos/${photo.image}`}
                     alt={photo.title}
                   />
                 )}
-                {id === userAuth._id ? (
-                  <div className="flex justify-around p-[10px]">
+                {id === userAuth._id && (
+                  <div className="flex justify-around p-3">
                     <Link to={`/photos/${photo._id}`}>
-                      <BsFillEyeFill className="cursor-pointer" />
+                      <BsFillEyeFill className="cursor-pointer text-gray-200 hover:text-[#833AB4] transition" />
                     </Link>
                     <BsPencilFill
                       onClick={() => handleEdit(photo)}
-                      className="cursor-pointer"
+                      className="cursor-pointer text-gray-200 hover:text-[#833AB4] transition"
                     />
                     <BsXLg
                       onClick={() => handleDelete(photo._id)}
-                      className="cursor-pointer"
+                      className="cursor-pointer text-gray-200 hover:text-red-500 transition"
                     />
                   </div>
-                ) : (
-                  <Link className="btn" to={`/photos/${photo._id}`}></Link>
                 )}
               </div>
-            ))}
-          {photos.lenght === 0 && <p>Ainda não há fotos publicadas</p>}
+            ))
+          ) : (
+            <p className="text-gray-400">Ainda não há fotos publicadas</p>
+          )}
         </div>
       </div>
     </div>
