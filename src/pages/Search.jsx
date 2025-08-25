@@ -51,17 +51,14 @@ const Search = () => {
         {photos &&
           photos.map((photo) => (
             <div key={photo._id}>
-              {/* Foto */}
               <PhotoItem photo={photo} />
 
-              {/* Likes */}
               <LikeContainer
                 photo={photo}
                 user={user}
                 handleLike={handleLike}
               />
 
-              {/* Botão Ver Mais */}
               <div className="flex justify-left pt-4">
                 <Link
                   to={`/photos/${photo._id}`}
