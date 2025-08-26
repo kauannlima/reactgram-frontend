@@ -37,10 +37,7 @@ const Home = () => {
         {photos && photos.length > 0 ? (
           <div className="flex flex-col gap-10">
             {photos.map((photo) => (
-              <div
-                key={photo._id}
-          
-              >
+              <div key={photo._id}>
                 {/* Foto */}
                 <PhotoItem photo={photo} />
 
@@ -64,15 +61,17 @@ const Home = () => {
             ))}
           </div>
         ) : (
-          <h2 className="text-center text-gray-300">
-            Ainda não há fotos publicadas,{" "}
-            <Link
-              to={`/users/${user._id}`}
-              className="text-[#3897F0] font-semibold hover:underline transition"
-            >
-              clique aqui
-            </Link>
-          </h2>
+          <div className="px-5">
+            <h2 className="text-center text-gray-300">
+              Ainda não há fotos publicadas,{" "}
+              <Link
+                to={`/users/${user._id}`}
+                className="text-[#3897F0] font-semibold hover:underline transition"
+              >
+                clique aqui
+              </Link>
+            </h2>
+          </div>
         )}
       </div>
     </div>
