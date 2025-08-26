@@ -61,7 +61,7 @@ const Home = () => {
             ))}
           </div>
         ) : (
-          <div className="px-5">
+          <div className="py-5">
             <h2 className="text-center text-gray-300">
               Ainda não há fotos publicadas,{" "}
               <Link
